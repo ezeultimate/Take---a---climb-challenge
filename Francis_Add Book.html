@@ -1,0 +1,118 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <meta charset="utf-8">
+
+  <head>
+  <title>
+  Address Book
+  </title>
+  <style>
+  input{
+    margin: 5px;
+  }
+  body{
+    background-color: purple;
+  }
+  #body{
+    display: block;
+    text-align: center;
+    padding: 100px;
+  }
+  img{
+    border-radius:
+    width:100px;
+    height: 100px;
+  }
+  span{
+    font-size: 60px;
+
+  }
+  input{
+    border: none;
+    width: 200px;
+    height: 25px;
+  }
+  button{
+    color: purple;
+  }
+  </style>
+  </head>
+  <body>
+    <div id="body">
+  <h1>ADDRESS BOOK </h1>
+<input placeholder="Name" id="name"><br>
+<input placeholder="City"  id="city"><br>
+<input placeholder="Phone"  id="phone"><br>
+<button onclick="add()">Add</button>
+
+<div id="contacts"></div>
+</div>
+<span>Designed by <img src="abook/mylogo2.png"></span>
+
+
+</body>
+<script>
+var contacts = [];
+
+function add(){
+
+  var name = document.getElementById('name').value;
+    var city = document.getElementById('city').value;
+    var phone = document.getElementById('phone').value;
+  //  alert("Hello " + name +" you currently stay in "  + city);
+  //create a variable for new contact
+  var newContact ={
+    newName: name,
+    newCity: city,
+    newPhone: phone
+  };
+  //push the newContact into the array
+  contacts.push(newContact);
+
+  updateDiv();
+};
+//Local stoarge for the contacts
+function showContacts(i){
+  if(localStorage["contacts"]===undefined){
+    localStorage["contacts"] = "[]";
+  }
+  else{
+    localStorage.setItem(contacts[i]);
+  }
+}
+  // create a forf loop to loop over the contacts
+function updateDiv(){
+
+  var viewContacts= "";
+  for(var i=0; i<contacts.length; i++){
+  viewContacts += "<p>Name: "
+    + contacts[i].newName + "<br> City: " +  contacts[i].newCity + "<br> Phone: " +  contacts[i].newPhone  + "<br> <span onclick='del("+ i +
+    ")'><button>Delete</button></span><span onclick='edit("+ i +
+  ")'><button>Edit</button></span> </p>";
+
+};
+
+    document.getElementById('contacts').innerHTML= viewContacts;
+
+  }
+  //create del function
+  function del(i){
+    contacts.splice(i, 1)//remove html elemnet
+updateDiv();// call back updateDivfunction to update contacts
+  }
+  function edit(i){
+    contacts.change(i, 1)
+    updateDiv();
+  }
+  //create edit function
+
+  //create a new div that can contain the contacts
+// document.getElementById('contacts').innerHTML= "<p>Name: "+ contacts[0].newName + " City: " +  contacts[0].newCity  + " </p>";
+//the above code can only run for one object
+
+
+
+</script>
+  </body>
+
+  </html>
